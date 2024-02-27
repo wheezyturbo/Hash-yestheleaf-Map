@@ -1,3 +1,5 @@
+const Node = require('./node');
+
 class HashMap {
   constructor() {
     this.buckets = new Array(100);
