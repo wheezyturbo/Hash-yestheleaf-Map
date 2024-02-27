@@ -12,6 +12,10 @@ class HashMap {
 
     return hashCode % this.buckets.length;
   }
+  set(key, value) {
+    const index = this._hash(key);
+    this.buckets[index] = ({key,value})
+  }
 }
 
 module.exports = HashMap;
