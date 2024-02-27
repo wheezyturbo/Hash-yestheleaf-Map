@@ -31,6 +31,12 @@ class HashMap {
     }
     return false;
   }
+  length(){
+    return this.buckets.filter(a=>a!=undefined).length;
+  }
+  clear(){
+    
+  }
 }
 
 module.exports = HashMap;
