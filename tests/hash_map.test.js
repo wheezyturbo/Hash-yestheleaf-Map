@@ -13,6 +13,7 @@ describe('HashMap', () => {
 
         expect(map.get('key1')).toBe('value1');
         expect(map.get('key2')).toBe('value2');
+        expect(map.get('key3')).toBe(null);
     });
 
     test('has()', () => {
