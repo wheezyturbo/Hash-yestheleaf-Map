@@ -35,7 +35,9 @@ class HashMap {
     return this.buckets.filter(a=>a!=undefined).length;
   }
   clear(){
-    
+    for(let i = 0;i<this.buckets.length;i++){
+      delete this.buckets[i];
+    }
   }
 }
 
