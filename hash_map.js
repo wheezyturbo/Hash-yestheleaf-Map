@@ -51,6 +51,14 @@ class HashMap {
   values(){
     return this.buckets.filter(e=>e!=undefined).map(e=>e.value);
   }
+  entries(){
+    return this.buckets.reduce((tmpArr,e)=>{
+      if(e!=undefined){
+        tmpArr.push([e.key,e.value]);
+      }
+      return tmpArr;
+    },[])
+  }
 }
 
 module.exports = HashMap;
