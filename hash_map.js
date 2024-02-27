@@ -1,8 +1,11 @@
 const LinkedList = require('./list');
 
 class HashMap {
-  constructor() {
-    this.buckets = new Array(100);
+  constructor(initialCapacity = 100, loadFactor = 0.75) {
+    this.buckets = new Array(initialCapacity);
+    this.size = 0;
+    this.loadFactor = loadFactor;
+    this.threshold = Math.floor(initialCapacity * loadFactor);
   }
   _hash(key) {
     let hashCode = 0;
@@ -16,12 +19,29 @@ class HashMap {
   }
   set(key, value) {
     const index = this._hash(key);
-    this.buckets[index] = { key, value };
+    if (!this.buckets[index]) {
+      this.buckets[index] = new LinkedList();
+      this.buckets[index].append(key, value);
+    } else {
+      const existingNode = this.buckets[index].find(key);
+      if (existingNode) {
+        existingNode.value = value;
+      } else {
+        this.buckets[index].append(key, value);
+      }
+    }
+    this.size++;
+    if (this.size >= this.threshold) {
+      this._resize();
+    }
   }
   get(key) {
-    return this.buckets[this._hash(key)]
-      ? this.buckets[this._hash(key)].value
-      : null;
+    const index = this._hash(key);
+    if (!this.buckets[index]) {
+      return null;
+    }
+    const node = this.buckets[index].find(key);
+    return node ? node.value : null;
   }
   has(key) {
     return this.buckets[this._hash(key)] ? true : false;
