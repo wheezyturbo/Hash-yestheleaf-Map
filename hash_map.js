@@ -25,19 +25,28 @@ class HashMap {
     return this.buckets[this._hash(key)] ? true : false;
   }
   remove(key) {
-    if(this.has(key)){
+    if (this.has(key)) {
       this.buckets.splice(this._hash(key), 1);
       return true;
     }
     return false;
   }
-  length(){
-    return this.buckets.filter(a=>a!=undefined).length;
+  length() {
+    return this.buckets.filter((a) => a != undefined).length;
   }
-  clear(){
-    for(let i = 0;i<this.buckets.length;i++){
+  clear() {
+    for (let i = 0; i < this.buckets.length; i++) {
       delete this.buckets[i];
     }
+  }
+  keys(){
+    return this.buckets.filter(e=>e!=undefined).map(e=>e.key);
+    // return this.buckets.reduce((tmpArr,e)=>{
+    //   if(e!=undefined){
+    //     tmpArr.push(e.key);
+    //   }
+    //   return tmpArr;
+    // },[])
   }
 }
 
