@@ -48,11 +48,13 @@ class HashMap {
     return this.buckets[index] ? this.buckets[index].find(key) !== null : false;
   }
   remove(key) {
-    if (this.has(key)) {
-      this.buckets.splice(this._hash(key), 1);
-      return true;
+    const index = this._hash(key);
+    if (!this.buckets[index]) {
+      return false;
     }
-    return false;
+    this.buckets[index].delete(key);
+    this.size--;
+    return true;
   }
   length() {
     return this.buckets.filter((a) => a != undefined).length;
