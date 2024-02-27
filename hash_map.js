@@ -64,25 +64,46 @@ class HashMap {
     this.buckets = new Array(this.buckets.length);
     this.size = 0;
   }
-  keys(){
-    return this.buckets.filter(e=>e!=undefined).map(e=>e.key);
-    // return this.buckets.reduce((tmpArr,e)=>{
-    //   if(e!=undefined){
-    //     tmpArr.push(e.key);
-    //   }
-    //   return tmpArr;
-    // },[])
-  }
-  values(){
-    return this.buckets.filter(e=>e!=undefined).map(e=>e.value);
-  }
-  entries(){
-    return this.buckets.reduce((tmpArr,e)=>{
-      if(e!=undefined){
-        tmpArr.push([e.key,e.value]);
+  keys() {
+    const keysArray = [];
+    this.buckets.forEach(bucket => {
+      if (bucket) {
+        let current = bucket.head;
+        while (current) {
+          keysArray.push(current.key);
+          current = current.next;
+        }
       }
-      return tmpArr;
-    },[])
+    });
+    return keysArray;
+  }
+
+  values() {
+    const valuesArray = [];
+    this.buckets.forEach(bucket => {
+      if (bucket) {
+        let current = bucket.head;
+        while (current) {
+          valuesArray.push(current.value);
+          current = current.next;
+        }
+      }
+    });
+    return valuesArray;
+  }
+
+  entries() {
+    const entriesArray = [];
+    this.buckets.forEach(bucket => {
+      if (bucket) {
+        let current = bucket.head;
+        while (current) {
+          entriesArray.push([current.key, current.value]);
+          current = current.next;
+        }
+      }
+    });
+    return entriesArray;
   }
 }
 
