@@ -1,7 +1,7 @@
 class HashMap {
-   constructor(){
+  constructor() {
     this.buckets = new Array(100);
-   }
+  }
   _hash(key) {
     let hashCode = 0;
 
@@ -14,15 +14,23 @@ class HashMap {
   }
   set(key, value) {
     const index = this._hash(key);
-    this.buckets[index] = ({key,value})
+    this.buckets[index] = { key, value };
   }
-  get(key){
-    return this.buckets[this._hash(key)]?this.buckets[this._hash(key)].value:null;
+  get(key) {
+    return this.buckets[this._hash(key)]
+      ? this.buckets[this._hash(key)].value
+      : null;
   }
-  has(key){
-    return this.buckets[this._hash(key)]?true:false;
+  has(key) {
+    return this.buckets[this._hash(key)] ? true : false;
   }
-  
+  remove(key) {
+    if(this.has(key)){
+      this.buckets.splice(this._hash(key), 1);
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = HashMap;
