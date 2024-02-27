@@ -48,6 +48,9 @@ class HashMap {
     //   return tmpArr;
     // },[])
   }
+  values(){
+    return this.buckets.filter(e=>e!=undefined).map(e=>e.value);
+  }
 }
 
 module.exports = HashMap;
