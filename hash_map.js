@@ -57,12 +57,12 @@ class HashMap {
     return true;
   }
   length() {
-    return this.buckets.filter((a) => a != undefined).length;
+    return this.size;
   }
+
   clear() {
-    for (let i = 0; i < this.buckets.length; i++) {
-      delete this.buckets[i];
-    }
+    this.buckets = new Array(this.buckets.length);
+    this.size = 0;
   }
   keys(){
     return this.buckets.filter(e=>e!=undefined).map(e=>e.key);
