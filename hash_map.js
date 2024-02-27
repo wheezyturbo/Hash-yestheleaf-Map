@@ -44,7 +44,8 @@ class HashMap {
     return node ? node.value : null;
   }
   has(key) {
-    return this.buckets[this._hash(key)] ? true : false;
+    const index = this._hash(key);
+    return this.buckets[index] ? this.buckets[index].find(key) !== null : false;
   }
   remove(key) {
     if (this.has(key)) {
