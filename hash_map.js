@@ -19,6 +19,9 @@ class HashMap {
   get(key){
     return this.buckets[this._hash(key)]?this.buckets[this._hash(key)].value:null;
   }
+  has(key){
+    return this.buckets[this._hash(key)]?true:false;
+  }
   
 }
 
